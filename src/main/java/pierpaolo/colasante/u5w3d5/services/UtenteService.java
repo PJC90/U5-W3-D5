@@ -17,6 +17,9 @@ public class UtenteService {
     private UtenteDAO utenteDAO;
     public List<Utente> getUtenti(){return this.utenteDAO.findAll();}
     public Utente findById(long id){return utenteDAO.findById(id).orElseThrow(()->new NotFoundExceptions(id));}
+    public Utente findByEmail(String email){
+        return utenteDAO.findByEmail(email).orElseThrow(()->new NotFoundExceptions("Utente con email " + email + " non trovata!!!"));
+    }
     public Utente findByIdAndUpdate(long id, Utente body){
         Utente found = this.findById(id);
         if (body.getUsername() != null) {found.setUsername(body.getUsername());}
