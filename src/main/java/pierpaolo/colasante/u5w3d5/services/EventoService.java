@@ -17,13 +17,13 @@ public class EventoService {
 
     public List<Evento> getEventi(){return this.eventoDAO.findAll();}
     public Evento findById(long id){return eventoDAO.findById(id).orElseThrow(()->new NotFoundExceptions(id));}
-    public Evento findByIdAndUpdate(long id, EventoDTO body){
+    public Evento findByIdAndUpdate(long id, Evento body){
         Evento found = this.findById(id);
-        if (body.titolo() != null) {found.setTitolo(body.titolo());}
-        if (body.descrizione() != null) {found.setDescrizione(body.descrizione());}
-        if (body.data() != null) {found.setData(body.data());}
-        if (body.luogo() != null) {found.setLuogo(body.luogo());}
-        if (body.postiDisponibili() != 0) {found.setPostiDisponibili(body.postiDisponibili());}
+        if (body.getTitolo() != null) {found.setTitolo(body.getTitolo());}
+        if (body.getDescrizione() != null) {found.setDescrizione(body.getDescrizione());}
+        if (body.getData() != null) {found.setData(body.getData());}
+        if (body.getLuogo() != null) {found.setLuogo(body.getLuogo());}
+        if (body.getPostiDisponibili() != 0) {found.setPostiDisponibili(body.getPostiDisponibili());}
 //        if (body.getAvatar() != null) {found.setAvatar(body.getAvatar());}
 
         return eventoDAO.save(found);

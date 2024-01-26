@@ -10,6 +10,7 @@ import pierpaolo.colasante.u5w3d5.exceptions.NotFoundExceptions;
 import pierpaolo.colasante.u5w3d5.payloads.PrenotazioneDTO;
 import pierpaolo.colasante.u5w3d5.repositories.PrenotazioneDAO;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -29,6 +30,7 @@ public class PrenotazioneService {
         Prenotazione prenotazione = new Prenotazione();
         prenotazione.setUtente(utente);
         prenotazione.setEvento(evento);
+        prenotazione.setDataPrenotazione(LocalDate.now());
         return prenotazioneDAO.save(prenotazione);
     }
     public Prenotazione findById(long id){
@@ -39,6 +41,7 @@ public class PrenotazioneService {
         Prenotazione found = this.findById(id);
         Utente utente = utenteService.findById(body.utente_id());
         Evento evento = eventoService.findById(body.evento_id());
+        found.setDataPrenotazione(LocalDate.now());
         found.setEvento(evento);
         found.setUtente(utente);
         return prenotazioneDAO.save(found);

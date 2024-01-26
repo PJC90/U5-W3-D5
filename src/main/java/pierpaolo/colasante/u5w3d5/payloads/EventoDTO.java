@@ -19,6 +19,6 @@ public record EventoDTO(
         @Size(min = 3, max = 30, message = "il luogo deve avere minimo 3 caratteri, massimo 30")
         String luogo,
         @NotNull(message = "posti disponibili è un campo obbligatorio!")
-        int postiDisponibili
+        Integer postiDisponibili
 ) {
 }

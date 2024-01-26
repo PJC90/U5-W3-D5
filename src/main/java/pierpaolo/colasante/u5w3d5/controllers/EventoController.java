@@ -26,7 +26,7 @@ public class EventoController {
 
     @PutMapping("/{id}")
     @PreAuthorize("hasAuthority('ADMIN')")
-    public Evento modificaEvento(@PathVariable long id, EventoDTO body){
+    public Evento modificaEvento(@PathVariable long id, @RequestBody Evento body){
         return eventoService.findByIdAndUpdate(id, body);
     }
     @DeleteMapping("/{id}")
