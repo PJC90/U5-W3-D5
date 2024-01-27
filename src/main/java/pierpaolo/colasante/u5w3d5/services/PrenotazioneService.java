@@ -31,6 +31,7 @@ public class PrenotazioneService {
         prenotazione.setUtente(utente);
         prenotazione.setEvento(evento);
         prenotazione.setDataPrenotazione(LocalDate.now());
+        prenotazione.setNumeroPartecipanti(body.numero_partecipanti());
         return prenotazioneDAO.save(prenotazione);
     }
     public Prenotazione findById(long id){

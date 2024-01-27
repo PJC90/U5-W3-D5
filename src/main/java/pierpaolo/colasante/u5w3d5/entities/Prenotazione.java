@@ -13,6 +13,7 @@ public class Prenotazione {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    private int numeroPartecipanti;
     private LocalDate dataPrenotazione;
     @ManyToOne
     @JoinColumn(name = "evento_id")

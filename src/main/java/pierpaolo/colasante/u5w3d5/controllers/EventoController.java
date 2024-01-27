@@ -3,11 +3,13 @@ package pierpaolo.colasante.u5w3d5.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.w3c.dom.events.Event;
 import pierpaolo.colasante.u5w3d5.entities.Evento;
 import pierpaolo.colasante.u5w3d5.payloads.EventoDTO;
 import pierpaolo.colasante.u5w3d5.services.EventoService;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -22,6 +24,15 @@ public class EventoController {
     @PreAuthorize("hasAuthority('ADMIN')")
     public Evento saveEvento(@RequestBody EventoDTO body){
         return eventoService.saveEvento(body);
+    }
+    @PostMapping("/{id}/upload")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public Evento uploadAvatar(@RequestParam("avatar") MultipartFile file, @PathVariable int id)  {
+        try {
+            return eventoService.uploadPicture(id,file);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @PutMapping("/{id}")
