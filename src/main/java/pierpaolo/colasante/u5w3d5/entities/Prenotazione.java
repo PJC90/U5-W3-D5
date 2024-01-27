@@ -1,12 +1,14 @@
 package pierpaolo.colasante.u5w3d5.entities;
 
 import jakarta.persistence.*;
+import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
 
 @Entity
 @Setter
+@Getter
 public class Prenotazione {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
