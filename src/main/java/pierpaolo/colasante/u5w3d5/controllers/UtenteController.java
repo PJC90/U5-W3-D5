@@ -6,6 +6,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import pierpaolo.colasante.u5w3d5.entities.Prenotazione;
 import pierpaolo.colasante.u5w3d5.entities.Utente;
 import pierpaolo.colasante.u5w3d5.services.UtenteService;
 
@@ -23,4 +24,6 @@ public class UtenteController {
     public Utente getUtente(@AuthenticationPrincipal Utente utente) {
         return utente;
     }
+    @GetMapping("/me/prenotazioni")
+    public List<Prenotazione> getPrenotazioniUtente(@AuthenticationPrincipal Utente utente){return utente.getPrenotazioni();}
 }

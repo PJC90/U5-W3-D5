@@ -28,7 +28,6 @@ public class SecurityConfig {
         httpSecurity.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
         httpSecurity.authorizeHttpRequests(request -> request.requestMatchers("/**").permitAll());
-
         return httpSecurity.build();
     }
     @Bean

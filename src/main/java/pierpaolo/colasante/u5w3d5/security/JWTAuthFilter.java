@@ -16,8 +16,11 @@ import pierpaolo.colasante.u5w3d5.exceptions.UnauthorizedException;
 import pierpaolo.colasante.u5w3d5.services.UtenteService;
 
 import java.io.IOException;
+import java.util.stream.Stream;
+
 @Component
 public class JWTAuthFilter extends OncePerRequestFilter {
+    private static final AntPathMatcher pathMatcher = new AntPathMatcher();
     @Autowired
     private JWTtools jwTtools;
     @Autowired
@@ -45,6 +48,17 @@ public class JWTAuthFilter extends OncePerRequestFilter {
 }
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
-        return new AntPathMatcher().match("/auth/**", request.getServletPath());
+        String[] allowedPaths = {"/auth/**", "/swagger-ui/**", "/v3/**"};
+
+        return Stream.of(allowedPaths)
+                .anyMatch(path -> pathMatcher.match(path, request.getServletPath()));
     }
+    //    @Override
+//    protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
+//        return new AntPathMatcher().match("/auth/**", request.getServletPath());
+//    }
+
 }
+
+////        http://localhost:3001/v3/api-docs.yaml
+////        http://localhost:3001/swagger-ui/index.html
